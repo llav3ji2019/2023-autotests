@@ -1,0 +1,23 @@
+package user;
+
+public class OkUserBuilder implements UserBuilder {
+    private String login;
+    private String password;
+
+    @Override
+    public UserBuilder setLogin(String login) {
+        this.login = login;
+        return this;
+    }
+
+    @Override
+    public UserBuilder setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    @Override
+    public User build() {
+        return new User(login, password);
+    }
+}
