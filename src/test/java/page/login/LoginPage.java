@@ -17,23 +17,34 @@ public class LoginPage {
     private final SelenideElement signInButton = $x("//input[@type='submit' and @class='button-pro __wide']");
 
     public LoginPage openPage() {
-        open(LOGIN_PAGE_URL);
-        return this;
+        return doOpenPage();
     }
 
     public HomePage signIn(User user) {
+        return doSignIn(user);
+    }
+
+    public HomePage signIn(final String name, final String login, final String password) {
+        return signIn(createUser(name, login, password));
+    }
+
+    private HomePage doSignIn(User user) {
         loginInput.setValue(user.getLogin());
         passwordInput.setValue(user.getPassword());
         signInButton.click();
         return new HomePage();
     }
 
-    public HomePage signIn(final String name, final String login, final String password) {
-        User user = new OkUserBuilder()
+    private static User createUser(final String name, final String login, final String password) {
+        return new OkUserBuilder()
                 .setPassword(password)
                 .setLogin(login)
                 .setName(name)
                 .build();
-        return signIn(user);
+    }
+
+    private LoginPage doOpenPage() {
+        open(LOGIN_PAGE_URL);
+        return this;
     }
 }
