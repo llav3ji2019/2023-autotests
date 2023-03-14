@@ -1,10 +1,12 @@
 package user;
 
 public class User {
+    private final String fullName;
     private final String login;
     private final String password;
 
-    public User(String login, String password) {
+    public User(final String fullName, final String login, final String password) {
+        this.fullName = fullName;
         this.login = login;
         this.password = password;
     }

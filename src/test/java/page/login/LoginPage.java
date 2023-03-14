@@ -1,8 +1,8 @@
-package login;
+package page.login;
 
 import com.codeborne.selenide.SelenideElement;
 
-import home.HomePage;
+import page.home.HomePage;
 import user.OkUserBuilder;
 import user.User;
 
@@ -21,14 +21,19 @@ public class LoginPage {
         return this;
     }
 
-    public HomePage signIn(final String login, final String password) {
-        User user = new OkUserBuilder()
-                .setPassword(password)
-                .setLogin(login)
-                .build();
+    public HomePage signIn(User user) {
         loginInput.setValue(user.getLogin());
         passwordInput.setValue(user.getPassword());
         signInButton.click();
         return new HomePage();
+    }
+
+    public HomePage signIn(final String name, final String login, final String password) {
+        User user = new OkUserBuilder()
+                .setPassword(password)
+                .setLogin(login)
+                .setName(name)
+                .build();
+        return signIn(user);
     }
 }

@@ -1,8 +1,15 @@
 package user;
 
 public class OkUserBuilder implements UserBuilder {
+    private String name;
     private String login;
     private String password;
+
+    @Override
+    public UserBuilder setName(String name) {
+        this.name = name;
+        return this;
+    }
 
     @Override
     public UserBuilder setLogin(String login) {
@@ -18,6 +25,6 @@ public class OkUserBuilder implements UserBuilder {
 
     @Override
     public User build() {
-        return new User(login, password);
+        return new User(name, login, password);
     }
 }

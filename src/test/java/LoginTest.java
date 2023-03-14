@@ -1,11 +1,22 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import login.LoginPage;
+import page.home.HomePage;
+import page.login.LoginPage;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LoginTest extends BaseTest {
+    private final LoginPage loginPage = new LoginPage();
+    private HomePage homePage;
+
+    @BeforeEach
+    public void login() {
+        homePage = loginPage.openPage().signIn("Павел Емельянов","79*********", "******");
+    }
+
     @Test
     public void test() {
-        LoginPage loginPage = new LoginPage();
-        loginPage.openPage().signIn("79313643643", "pavel2003");
+        assertTrue(homePage.check("Павел Емельянов"));
     }
 }
