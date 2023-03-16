@@ -17,6 +17,6 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void loginTest() {
-        assertTrue(homePage.isLoaded(user));
+        assertTrue(homePage.checkPage(user));
     }
 }

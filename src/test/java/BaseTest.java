@@ -24,7 +24,6 @@ public class BaseTest {
                 .build();
     }
 
-
     @BeforeEach
     public void init() {
         doInit();
