@@ -1,6 +1,6 @@
 package user;
 
-public class OkUserBuilder implements UserBuilder {
+public class UserHandler implements UserBuilder {
     private String name;
     private String login;
     private String password;
