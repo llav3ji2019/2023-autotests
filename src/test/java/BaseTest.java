@@ -18,9 +18,9 @@ public class BaseTest {
 
     static {
         user = new UserHandler()
-                .setLogin("79313643643")
+                .setLogin("79******")
                 .setName("Павел Емельянов")
-                .setPassword("pavel2003")
+                .setPassword("****************")
                 .build();
     }
 
