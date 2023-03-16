@@ -12,11 +12,11 @@ public class LoginTest extends BaseTest {
 
     @BeforeEach
     public void login() {
-        homePage = loginPage.signIn("Павел Емельянов", "79313643643", "pavel2003");
+        homePage = loginPage.signIn(user);
     }
 
     @Test
     public void loginTest() {
-        assertTrue(homePage.isLoaded("Павел Емельянов"));
+        assertTrue(homePage.isLoaded(user));
     }
 }
