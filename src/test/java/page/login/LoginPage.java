@@ -2,7 +2,6 @@ package page.login;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
 import page.LoadableComponent;

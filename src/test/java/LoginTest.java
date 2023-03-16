@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import page.home.HomePage;
@@ -15,6 +16,7 @@ public class LoginTest extends BaseTest {
         homePage = loginPage.signIn(user);
     }
 
+    @DisplayName("Test for user login to the site https://ok.ru/")
     @Test
     public void loginTest() {
         assertTrue(homePage.checkPage(user));
