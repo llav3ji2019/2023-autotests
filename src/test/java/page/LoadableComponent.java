@@ -9,8 +9,6 @@ import static com.codeborne.selenide.Condition.visible;
 
 public interface LoadableComponent {
     default SelenideElement isLoaded(SelenideElement element, long timeOutInSeconds) {
-        element.should(exist, Duration.ofSeconds(timeOutInSeconds));
-        element.should(visible, Duration.ofSeconds(timeOutInSeconds));
-        return element;
+        return element.should(visible, Duration.ofSeconds(timeOutInSeconds));
     }
 }
