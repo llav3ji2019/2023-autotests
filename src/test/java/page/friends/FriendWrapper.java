@@ -9,7 +9,7 @@ import page.LoadableComponent;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 
-public class FriendCard implements LoadableComponent {
+public class FriendWrapper implements LoadableComponent {
     private static final long TIME_OUT_IN_SECONDS = 5;
     private static final By FRIEND_NAME = byXpath(".//a[@class='n-t bold']");
     private static final By CHAT_BUTTON = byXpath(".//a[@data-l='t,sendMessage']");
@@ -21,7 +21,7 @@ public class FriendCard implements LoadableComponent {
 
     private final SelenideElement friendRoot;
 
-    public FriendCard(@NotNull final SelenideElement friendRoot) {
+    public FriendWrapper(@NotNull final SelenideElement friendRoot) {
         isLoaded(friendRoot, FRIEND_CARD_MESSAGE, TIME_OUT_IN_SECONDS);
         this.friendRoot = friendRoot;
     }

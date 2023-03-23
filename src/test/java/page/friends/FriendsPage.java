@@ -39,23 +39,23 @@ public class FriendsPage implements LoadableComponent {
         ElementsCollection allFriends = isLoaded($$(FRIEND_CARD), CURRENT_FRIEND_CARD_MESSAGE, TIME_OUT_IN_SECONDS)
                 .should(sizeNotEqual(0).because(FRIEND_CARD_MESSAGE));
         for (SelenideElement friend : allFriends) {
-            FriendCard currentCard = new FriendCard(friend);
+            FriendWrapper currentCard = new FriendWrapper(friend);
             if (currentCard.getName().equals(name)) {
                 return currentCard.openChatPage().check();
             }
         }
-        return new FriendCard(allFriends.get(0)).openChatPage().check();
+        return new FriendWrapper(allFriends.get(0)).openChatPage().check();
     }
 
     public CallPage startPhoneCall(@NotNull final String name) {
         ElementsCollection allFriends = isLoaded($$(FRIEND_CARD), CURRENT_FRIEND_CARD_MESSAGE, TIME_OUT_IN_SECONDS)
                 .should(sizeNotEqual(0).because(FRIEND_CARD_MESSAGE));
         for (SelenideElement friend : allFriends) {
-            FriendCard currentCard = new FriendCard(friend);
+            FriendWrapper currentCard = new FriendWrapper(friend);
             if (currentCard.getName().equals(name)) {
                 return currentCard.openCallPage().check();
             }
         }
-        return new FriendCard(allFriends.get(0)).openCallPage().check();
+        return new FriendWrapper(allFriends.get(0)).openCallPage().check();
     }
 }
