@@ -1,10 +1,9 @@
-package tests.call;
+package tests.callfriend;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import page.friends.ChatPage;
 import page.home.HomePage;
 import page.login.LoginPage;
 import tests.BaseTest;
