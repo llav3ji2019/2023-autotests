@@ -19,7 +19,7 @@ public class UserContainer {
 
         users.add(new UserHandler()
                 .setLogin("botS23AT28")
-                .setName("botS23AT28 botS23AT289")
+                .setName("botS23AT28 botS23AT28")
                 .setPassword("autotests2023")
                 .build());
 
