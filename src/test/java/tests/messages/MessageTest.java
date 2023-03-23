@@ -8,7 +8,7 @@ import page.friends.ChatPage;
 import page.home.HomePage;
 import page.login.LoginPage;
 import tests.BaseTest;
-import tests.UserContainer;
+import user.UserContainer;
 import user.User;
 
 import static org.hamcrest.MatcherAssert.assertThat;
