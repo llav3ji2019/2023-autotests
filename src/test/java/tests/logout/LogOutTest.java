@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import page.home.HomePage;
 import page.login.LoginPage;
 import tests.BaseTest;
-import user.UserContainer;
-import user.User;
+import utils.user.UserContainer;
+import utils.user.User;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -24,7 +24,7 @@ public class LogOutTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Test for user exiting the messenger")
+    @DisplayName("User exit from ok.ru test")
     public void logOutTest() {
         assertThat(MAIN_ELEMENT_NOT_FOUND, homePage.exit().checkPage());
     }

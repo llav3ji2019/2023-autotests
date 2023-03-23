@@ -1,4 +1,4 @@
-package user;
+package utils.user;
 
 public interface UserBuilder {
     UserBuilder setLogin(String login);

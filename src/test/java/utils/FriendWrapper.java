@@ -1,4 +1,4 @@
-package page.friends;
+package utils;
 
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import com.codeborne.selenide.SelenideElement;
 
 import page.LoadableComponent;
+import page.chat.ChatPage;
+import page.call.CallPage;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 

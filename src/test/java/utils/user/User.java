@@ -1,4 +1,4 @@
-package user;
+package utils.user;
 
 public class User {
     private final String fullName;

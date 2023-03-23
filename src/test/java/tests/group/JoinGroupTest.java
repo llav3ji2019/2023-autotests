@@ -1,4 +1,4 @@
-package tests.joingroup;
+package tests.group;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -8,8 +8,8 @@ import page.group.GroupPage;
 import page.home.HomePage;
 import page.login.LoginPage;
 import tests.BaseTest;
-import user.User;
-import user.UserContainer;
+import utils.user.User;
+import utils.user.UserContainer;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -25,7 +25,7 @@ public class JoinGroupTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Test for user joining to the first group")
+    @DisplayName("User join group")
     public void joinGroupTest() {
         GroupPage groupPage = homePage.openGroupPage().check();
         String newGroupName = groupPage.joinRandomGroup().getNewGroupName();

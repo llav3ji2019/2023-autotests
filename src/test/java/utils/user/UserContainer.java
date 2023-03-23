@@ -1,10 +1,7 @@
-package user;
+package utils.user;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import user.User;
-import user.UserHandler;
 
 public class UserContainer {
     private final List<User> users = new ArrayList<>();

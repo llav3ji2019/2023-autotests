@@ -1,11 +1,11 @@
-package page.group;
+package page.profilegroup;
 
 import com.codeborne.selenide.SelenideElement;
 
 import page.LoadableComponent;
+import page.group.GroupPage;
 
 import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.back;
 
 public class ProfileGroupPage implements LoadableComponent {
     private static final long TIME_OUT_IN_SECONDS = 5;

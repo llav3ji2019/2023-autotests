@@ -1,8 +1,9 @@
-package page.friends;
+package page.call;
 
 import com.codeborne.selenide.SelenideElement;
 
 import page.LoadableComponent;
+import page.friends.FriendsPage;
 
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -14,7 +15,6 @@ public class CallPage implements LoadableComponent {
     private static final SelenideElement CHAT_BUTTON = $x("//msg-button[@title='Отправить сообщение']");
     private static final SelenideElement POSITION_BUTTON = $x("//msg-button[@title='Свернуть окно звонка']");
     private static final SelenideElement DISPLAY_MODE_BUTTON = $x("//msg-button[@title='Включить полноэкранный режим']");
-
     private static final String FINISH_CONVERSATION_MESSAGE = "Can't find finish conversation button";
     private static final String VIDEO_MESSAGE = "Can't find video button";
     private static final String MICROPHONE_MESSAGE = "Can't find microphone button";

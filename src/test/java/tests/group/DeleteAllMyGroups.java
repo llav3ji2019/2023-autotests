@@ -1,4 +1,4 @@
-package tests.deletegroup;
+package tests.group;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -8,8 +8,8 @@ import page.group.GroupPage;
 import page.home.HomePage;
 import page.login.LoginPage;
 import tests.BaseTest;
-import user.User;
-import user.UserContainer;
+import utils.user.User;
+import utils.user.UserContainer;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,7 +27,7 @@ public class DeleteAllMyGroups extends BaseTest {
     }
 
     @Test
-    @DisplayName("Test for user deleting all his groups")
+    @DisplayName("User deletes all their groups")
     public void deleteAllUsersGroupsTest() {
         GroupPage groupPage = homePage.openGroupPage().check();
         assertThat(YOUR_GROUPS_IS_EMPTY_ERROR, !groupPage.areAllMyGroupsDeleted());

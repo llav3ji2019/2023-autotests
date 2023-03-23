@@ -1,4 +1,4 @@
-package page.group;
+package utils;
 
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import com.codeborne.selenide.SelenideElement;
 
 import page.LoadableComponent;
+import page.profilegroup.ProfileGroupPage;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$x;

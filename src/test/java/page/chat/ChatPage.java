@@ -1,4 +1,4 @@
-package page.friends;
+package page.chat;
 
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.Keys;

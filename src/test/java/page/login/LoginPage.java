@@ -8,8 +8,8 @@ import com.codeborne.selenide.SelenideElement;
 
 import page.LoadableComponent;
 import page.home.HomePage;
-import user.User;
-import user.UserHandler;
+import utils.user.User;
+import utils.user.UserHandler;
 
 import static com.codeborne.selenide.Selenide.$x;
 

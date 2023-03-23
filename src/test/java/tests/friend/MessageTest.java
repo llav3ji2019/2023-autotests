@@ -1,15 +1,15 @@
-package tests.messages;
+package tests.friend;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import page.friends.ChatPage;
+import page.chat.ChatPage;
 import page.home.HomePage;
 import page.login.LoginPage;
 import tests.BaseTest;
-import user.UserContainer;
-import user.User;
+import utils.user.UserContainer;
+import utils.user.User;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -28,7 +28,7 @@ public class MessageTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Test for user sending a message")
+    @DisplayName("User sends a message to the friend")
     public void sendMessageTest() {
         ChatPage chatPage = homePage.openFriendPage().check().openChat(FRIEND_NAME);
         assertThat(WRONG_CHAT_TITLE, chatPage.getChatTitle().equals(FRIEND_NAME));

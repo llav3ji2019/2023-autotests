@@ -8,7 +8,7 @@ import page.LoadableComponent;
 import page.friends.FriendsPage;
 import page.group.GroupPage;
 import page.login.LoginPage;
-import user.User;
+import utils.user.User;
 
 import static com.codeborne.selenide.Selenide.$x;
 

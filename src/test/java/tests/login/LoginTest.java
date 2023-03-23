@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import page.home.HomePage;
 import page.login.LoginPage;
 import tests.BaseTest;
-import user.UserContainer;
-import user.User;
+import utils.user.UserContainer;
+import utils.user.User;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

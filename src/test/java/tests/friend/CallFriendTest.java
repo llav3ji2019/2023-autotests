@@ -1,4 +1,4 @@
-package tests.callfriend;
+package tests.friend;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import page.home.HomePage;
 import page.login.LoginPage;
 import tests.BaseTest;
-import user.User;
-import user.UserContainer;
+import utils.user.User;
+import utils.user.UserContainer;
 
 public class CallFriendTest extends BaseTest {
     private static final String FRIEND_NAME = "Павел Емельянов";
@@ -22,8 +22,8 @@ public class CallFriendTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Test for user calling to a friend")
-    public void sendMessageTest() {
+    @DisplayName("User calls to the friend test")
+    public void callFriendTest() {
         homePage.openFriendPage()
                 .check()
                 .startPhoneCall(FRIEND_NAME)

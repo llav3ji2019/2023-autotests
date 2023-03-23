@@ -1,4 +1,4 @@
-package user;
+package utils.user;
 
 public class UserHandler implements UserBuilder {
     private String name;
