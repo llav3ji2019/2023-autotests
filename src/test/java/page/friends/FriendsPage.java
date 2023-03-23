@@ -41,9 +41,9 @@ public class FriendsPage implements LoadableComponent {
             isLoaded(friend, CURRENT_FRIEND_CARD_MESSAGE, TIME_OUT_IN_SECONDS);
             FriendCard currentCard = new FriendCard(friend);
             if (currentCard.getName().equals(name)) {
-                return currentCard.openChatPage().check(name);
+                return currentCard.openChatPage().check();
             }
         }
-        return new FriendCard(allFriends.get(0)).openChatPage().check(name);
+        return new FriendCard(allFriends.get(0)).openChatPage().check();
     }
 }
