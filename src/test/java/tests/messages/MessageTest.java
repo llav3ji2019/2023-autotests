@@ -1,6 +1,7 @@
 package tests.messages;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import page.friends.ChatPage;
@@ -10,8 +11,6 @@ import tests.BaseTest;
 import tests.UserContainer;
 import user.User;
 
-import static java.util.concurrent.CompletableFuture.anyOf;
-import static org.apache.commons.lang3.StringUtils.startsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class MessageTest extends BaseTest {
@@ -28,7 +27,8 @@ public class MessageTest extends BaseTest {
     }
 
     @Test
-    public void sendMessageTest(){
+    @DisplayName("Test for user sending a message")
+    public void sendMessageTest() {
         ChatPage chatPage = homePage.openFriendPage().check().openChat(FRIEND_NAME);
         assertThat(WRONG_CHAT_TITLE, chatPage.getChatTitle().equals(FRIEND_NAME));
         chatPage.sendMessage(DEFAULT_TEXT);

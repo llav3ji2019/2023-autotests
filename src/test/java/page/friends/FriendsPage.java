@@ -36,9 +36,9 @@ public class FriendsPage implements LoadableComponent {
     }
 
     public ChatPage openChat(@NotNull final String name) {
-        ElementsCollection allFriends = $$(FRIEND_CARD).should(sizeNotEqual(0).because(FRIEND_CARD_MESSAGE));
-        for (SelenideElement friend: allFriends) {
-            isLoaded(friend, CURRENT_FRIEND_CARD_MESSAGE, TIME_OUT_IN_SECONDS);
+        ElementsCollection allFriends = isLoaded($$(FRIEND_CARD), CURRENT_FRIEND_CARD_MESSAGE, TIME_OUT_IN_SECONDS)
+                .should(sizeNotEqual(0).because(FRIEND_CARD_MESSAGE));
+        for (SelenideElement friend : allFriends) {
             FriendCard currentCard = new FriendCard(friend);
             if (currentCard.getName().equals(name)) {
                 return currentCard.openChatPage().check();

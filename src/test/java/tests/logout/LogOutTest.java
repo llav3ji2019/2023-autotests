@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import dev.failsafe.internal.util.Assert;
 import page.home.HomePage;
 import page.login.LoginPage;
 import tests.BaseTest;

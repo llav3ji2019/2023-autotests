@@ -30,7 +30,7 @@ public class FriendCard implements LoadableComponent {
     }
 
     public ChatPage openChatPage() {
-        isLoaded(friendRoot.$(CHAT_BUTTON), CHAT_BUTTON_MESSAGE,TIME_OUT_IN_SECONDS).click();
+        isLoaded(friendRoot.$(CHAT_BUTTON), CHAT_BUTTON_MESSAGE, TIME_OUT_IN_SECONDS).click();
         return new ChatPage();
     }
 }

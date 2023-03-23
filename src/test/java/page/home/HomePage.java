@@ -40,13 +40,13 @@ public class HomePage implements LoadableComponent {
 
     public LoginPage exit() {
         isLoaded(EXIT_BAR, EXIT_BAR_MESSAGE, TIME_OUT_IN_SECONDS).click();
-        isLoaded(LOG_OUT_BUTTON, LOG_OUT_BUTTON_MESSAGE,TIME_OUT_IN_SECONDS).click();
-        isLoaded(CONFIRM_EXIT_BUTTON, CONFIRM_EXIT_BUTTON_MESSAGE,TIME_OUT_IN_SECONDS).click();
+        isLoaded(LOG_OUT_BUTTON, LOG_OUT_BUTTON_MESSAGE, TIME_OUT_IN_SECONDS).click();
+        isLoaded(CONFIRM_EXIT_BUTTON, CONFIRM_EXIT_BUTTON_MESSAGE, TIME_OUT_IN_SECONDS).click();
         return new LoginPage();
     }
 
     public FriendsPage openFriendPage() {
-        isLoaded(FRIENDS_BUTTON, FRIENDS_BUTTON_MESSAGE,TIME_OUT_IN_SECONDS).click();
+        isLoaded(FRIENDS_BUTTON, FRIENDS_BUTTON_MESSAGE, TIME_OUT_IN_SECONDS).click();
         return new FriendsPage();
     }
 
