@@ -47,9 +47,8 @@ public class GroupPage implements LoadableComponent {
                 .first()).getGroupName();
     }
 
-    public GroupPage refresh() {
+    public void refresh() {
         Selenide.refresh();
-        return this;
     }
 
     public boolean isGroupAddedToMyGroupsList(@NotNull final String groupName) {

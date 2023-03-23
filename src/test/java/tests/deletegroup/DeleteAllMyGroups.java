@@ -15,6 +15,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DeleteAllMyGroups extends BaseTest {
+    private static final String YOUR_GROUPS_IS_EMPTY_ERROR = "Your groups shouldn't be empty";
+    private static final String GROUPS_IS_DELETED = "All groups should be deleted";
+
     private HomePage homePage;
     private final User user = new UserContainer().getUniqueUser();
 
@@ -26,7 +29,9 @@ public class DeleteAllMyGroups extends BaseTest {
     @Test
     @DisplayName("Test for user deleting all his groups")
     public void deleteAllUsersGroupsTest() {
-        homePage.openGroupPage().check().deleteAllGroups();
-        assertThat("All groups are deleted", homePage.openGroupPage().areAllMyGroupsDeleted());
+        GroupPage groupPage = homePage.openGroupPage().check();
+        assertThat(YOUR_GROUPS_IS_EMPTY_ERROR, !groupPage.areAllMyGroupsDeleted());
+        groupPage.deleteAllGroups();
+        assertThat(GROUPS_IS_DELETED, groupPage.areAllMyGroupsDeleted());
     }
 }
