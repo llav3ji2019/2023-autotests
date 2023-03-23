@@ -31,6 +31,7 @@ public class UserContainer {
     }
 
     public User getUniqueUser() {
+        counter %= 3;
         return users.get(counter++);
     }
 }
