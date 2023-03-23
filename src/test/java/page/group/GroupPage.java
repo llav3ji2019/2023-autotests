@@ -24,7 +24,7 @@ public class GroupPage implements LoadableComponent {
     private static final String GROUP_CARD_MESSAGE = "Some card is unvisible";
     private static final String MY_GROUP_CARD_MESSAGE = "My card is unvisible";
     private static final String COLLECTION_SIZE_MESSAGE = "Collection size shouldn't be empty";
-    private static final ElementsCollection MY_GROUP_CARD = $$x("//li[@class='scroll-slider_item mr-x']");
+    private ElementsCollection groupCards = $$x("//li[@class='scroll-slider_item mr-x']");
     private static final ElementsCollection GROUP_COLLECTION = $$x("//div[@data-l='groupCard,POPULAR_GROUPS.popularTop']");
 
     public GroupPage check() {
@@ -53,15 +53,28 @@ public class GroupPage implements LoadableComponent {
     }
 
     public boolean isGroupAddedToMyGroupsList(@NotNull final String groupName) {
-        isLoaded(MY_GROUP_CARD, MY_GROUP_CARD_MESSAGE, TIME_OUT_IN_SECONDS)
+        isLoaded(groupCards, MY_GROUP_CARD_MESSAGE, TIME_OUT_IN_SECONDS)
                 .should(sizeNotEqual(0).because(COLLECTION_SIZE_MESSAGE));
-        for (SelenideElement element: MY_GROUP_CARD) {
+        for (SelenideElement element: groupCards) {
             String currentMyGroupWrapper = new MyGroupWrapper(element).getGroupName();
-            System.out.println(currentMyGroupWrapper);
             if (currentMyGroupWrapper.equals(groupName)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public GroupPage deleteAllGroups() {
+        isLoaded(groupCards, MY_GROUP_CARD_MESSAGE, TIME_OUT_IN_SECONDS)
+                .should(sizeNotEqual(0).because(COLLECTION_SIZE_MESSAGE));
+        int myGroupsSize = groupCards.size();
+        for (int i = 0; i < myGroupsSize; i++) {
+            new MyGroupWrapper(groupCards.get(0)).deleteGroup().check().exitFromGroup().goToGroupsPage();
+        }
+        return this;
+    }
+
+    public boolean areAllMyGroupsDeleted() {
+        return isLoaded(groupCards, MY_GROUP_CARD_MESSAGE, TIME_OUT_IN_SECONDS).isEmpty();
     }
 }

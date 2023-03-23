@@ -8,7 +8,6 @@ import com.codeborne.selenide.SelenideElement;
 import page.LoadableComponent;
 
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class MyGroupWrapper  implements LoadableComponent {
@@ -27,5 +26,10 @@ public class MyGroupWrapper  implements LoadableComponent {
     public String getGroupName() {
         isLoaded(root.$(MY_GROUP_BUTTON), MY_GROUP_MESSAGE, TIME_OUT_IN_SECONDS).hover();
         return isLoaded(MY_GROUP_TITLE_BUTTON, MY_GROUP_TITLE_MESSAGE, TIME_OUT_IN_SECONDS).text();
+    }
+
+    public ProfileGroupPage deleteGroup() {
+        isLoaded(root.$(MY_GROUP_BUTTON), MY_GROUP_MESSAGE, TIME_OUT_IN_SECONDS).click();
+        return new ProfileGroupPage();
     }
 }
