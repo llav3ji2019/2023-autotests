@@ -34,6 +34,5 @@ public class MessageTest extends BaseTest {
         assertThat(WRONG_CHAT_TITLE, chatPage.getChatTitle().equals(FRIEND_NAME));
         chatPage.sendMessage(DEFAULT_TEXT);
         assertThat(LAST_MESSAGE_SENT_MESSAGE, DEFAULT_TEXT.equals(chatPage.getLastMessageText()));
-
     }
 }
