@@ -15,10 +15,12 @@ public class SuggestedGroupWrapper implements LoadableComponent {
     private static final By JOIN_GROUP_BUTTON = byXpath(".//a[contains(@class, 'group-join_btn')]");
     private static final String JOIN_GROUP_MESSAGE = "Can't join group";
     private static final String GROUP_NAME_MESSAGE = "Can't find group name";
+    private static final String GROUP_CARD_MESSAGE = "Can't find group card";
 
     private final SelenideElement root;
 
     public SuggestedGroupWrapper(@NotNull final SelenideElement root) {
+        isLoaded(root, GROUP_CARD_MESSAGE, TIME_OUT_IN_SECONDS);
         this.root = root;
     }
 

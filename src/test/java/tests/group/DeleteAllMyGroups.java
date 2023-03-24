@@ -2,6 +2,7 @@ package tests.group;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import page.group.GroupPage;
@@ -17,17 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class DeleteAllMyGroups extends BaseTest {
     private static final String YOUR_GROUPS_IS_EMPTY_ERROR = "Your groups shouldn't be empty";
     private static final String GROUPS_IS_DELETED = "All groups should be deleted";
+    private static final User USER = new UserContainer().getUniqueUser();
 
     private HomePage homePage;
-    private final User user = new UserContainer().getUniqueUser();
 
     @BeforeEach
     public void login() {
-        homePage = new LoginPage().signIn(user);
+        homePage = new LoginPage().signIn(USER);
     }
 
-    @Test
     @DisplayName("User deletes all their groups")
+    @RepeatedTest(value = 2, name = "Test {displayName} Number {currentRepetition}/{totalRepetitions}")
     public void deleteAllUsersGroupsTest() {
         GroupPage groupPage = homePage.openGroupPage().check();
         assertThat(YOUR_GROUPS_IS_EMPTY_ERROR, !groupPage.areAllMyGroupsDeleted());

@@ -10,21 +10,23 @@ import tests.BaseTest;
 import utils.user.UserContainer;
 import utils.user.User;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class LoginTest extends BaseTest {
+    private static final String RESULT_PAGE = "User should see home page";
+    private static final User USER = new UserContainer().getUniqueUser();
+
     private final LoginPage loginPage = new LoginPage();
     private HomePage homePage;
-    private final User user = new UserContainer().getUniqueUser();
 
     @BeforeEach
     public void login() {
-        homePage = loginPage.signIn(user);
+        homePage = loginPage.signIn(USER);
     }
 
     @DisplayName("Test for user login")
     @Test
     public void loginTest() {
-        assertTrue(homePage.checkPage(user));
+        assertThat(RESULT_PAGE, homePage.checkPage(USER));
     }
 }

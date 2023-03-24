@@ -26,7 +26,7 @@ public class GroupPage implements LoadableComponent {
     private static final String GROUP_CARD_MESSAGE = "Some card is unvisible";
     private static final String MY_GROUP_CARD_MESSAGE = "My card is unvisible";
     private static final String COLLECTION_SIZE_MESSAGE = "Collection size shouldn't be empty";
-    private ElementsCollection groupCards = $$x("//li[@class='scroll-slider_item mr-x']");
+    private final ElementsCollection groupCards = $$x("//li[@class='scroll-slider_item mr-x']");
     private static final ElementsCollection GROUP_COLLECTION = $$x("//div[@data-l='groupCard,POPULAR_GROUPS.popularTop']");
 
     public GroupPage check() {

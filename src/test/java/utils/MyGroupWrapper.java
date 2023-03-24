@@ -17,10 +17,12 @@ public class MyGroupWrapper  implements LoadableComponent {
     private static final SelenideElement MY_GROUP_TITLE_BUTTON = $x(".//a[@data-l='t,group']");
     private static final String MY_GROUP_MESSAGE = "Can't find my group";
     private static final String MY_GROUP_TITLE_MESSAGE = "Can't find group title";
+    private static final String GROUP_CARD_MESSAGE = "Can't find group card";
 
     private final SelenideElement root;
 
     public MyGroupWrapper(@NotNull final SelenideElement root) {
+        isLoaded(root, GROUP_CARD_MESSAGE, TIME_OUT_IN_SECONDS);
         this.root = root;
     }
 

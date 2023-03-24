@@ -14,13 +14,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class LogOutTest extends BaseTest {
     private static final String MAIN_ELEMENT_NOT_FOUND = "Can't find sign in button";
+    private static final User USER = new UserContainer().getUniqueUser();
 
     private HomePage homePage;
-    private final User user = new UserContainer().getUniqueUser();
 
     @BeforeEach
     public void login() {
-        homePage = new LoginPage().signIn(user);
+        homePage = new LoginPage().signIn(USER);
     }
 
     @Test

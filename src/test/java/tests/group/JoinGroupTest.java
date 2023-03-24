@@ -15,13 +15,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class JoinGroupTest extends BaseTest {
     private static final String GROUP_IS_ADDED_MESSAGE = "Added Group should be in list";
+    private static final User USER = new UserContainer().getUniqueUser();
 
     private HomePage homePage;
-    private final User user = new UserContainer().getUniqueUser();
 
     @BeforeEach
     public void login() {
-        homePage = new LoginPage().signIn(user);
+        homePage = new LoginPage().signIn(USER);
     }
 
     @Test

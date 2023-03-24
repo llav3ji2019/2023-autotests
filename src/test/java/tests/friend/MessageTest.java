@@ -1,8 +1,11 @@
 package tests.friend;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import page.chat.ChatPage;
 import page.home.HomePage;
@@ -15,24 +18,24 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class MessageTest extends BaseTest {
     private static final String FRIEND_NAME = "Павел Емельянов";
-    private static final String DEFAULT_TEXT = "Hello world!11";
     private static final String WRONG_CHAT_TITLE = "We are trying to send message to wrong friend";
     private static final String LAST_MESSAGE_SENT_MESSAGE = "Message wasn't sent";
+    private static final User USER = new UserContainer().getUniqueUser();
 
     private HomePage homePage;
-    private final User user = new UserContainer().getUniqueUser();
 
     @BeforeEach
     public void login() {
-        homePage = new LoginPage().signIn(user);
+        homePage = new LoginPage().signIn(USER);
     }
 
-    @Test
+    @ParameterizedTest(name = "Send message {0}")
+    @ValueSource(strings = {"Hello world!", "haha", "hi"})
     @DisplayName("User sends a message to the friend")
-    public void sendMessageTest() {
+    public void sendMessageTest(@NotNull final String text) {
         ChatPage chatPage = homePage.openFriendPage().check().openChat(FRIEND_NAME);
         assertThat(WRONG_CHAT_TITLE, chatPage.getChatTitle().equals(FRIEND_NAME));
-        chatPage.sendMessage(DEFAULT_TEXT);
-        assertThat(LAST_MESSAGE_SENT_MESSAGE, DEFAULT_TEXT.equals(chatPage.getLastMessageText()));
+        chatPage.sendMessage(text);
+        assertThat(LAST_MESSAGE_SENT_MESSAGE, text.equals(chatPage.getLastMessageText()));
     }
 }

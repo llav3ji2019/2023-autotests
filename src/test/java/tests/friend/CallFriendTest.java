@@ -12,13 +12,13 @@ import utils.user.UserContainer;
 
 public class CallFriendTest extends BaseTest {
     private static final String FRIEND_NAME = "Павел Емельянов";
+    private static final User USER = new UserContainer().getUniqueUser();
 
     private HomePage homePage;
-    private final User user = new UserContainer().getUniqueUser();
 
     @BeforeEach
     public void login() {
-        homePage = new LoginPage().signIn(user);
+        homePage = new LoginPage().signIn(USER);
     }
 
     @Test
