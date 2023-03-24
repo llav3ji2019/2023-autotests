@@ -28,8 +28,7 @@ public class SuggestedGroupWrapper implements LoadableComponent {
         return isLoaded(root.$(GROUP_NAME_BUTTON), GROUP_NAME_MESSAGE, TIME_OUT_IN_SECONDS).text();
     }
 
-    public String joinGroup() {
+    public void joinGroup() {
         isLoaded(root.$(JOIN_GROUP_BUTTON), JOIN_GROUP_MESSAGE, TIME_OUT_IN_SECONDS).click();
-        return getGroupName();
     }
 }
