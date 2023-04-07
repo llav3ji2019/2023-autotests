@@ -20,10 +20,13 @@ public class ChatPage implements LoadableComponent {
     private static final String TEXT_INPUT_MESSAGE = "Can't find input where i can enter some text";
     private static final String LAST_SENT_MESSAGE = "Can't find message";
 
-    public ChatPage check() {
+    public ChatPage() {
+        check();
+    }
+
+    private void check() {
         isLoaded(CHAT_TITLE, CHAT_ITEM_MESSAGE, TIME_OUT_IN_SECONDS);
         isLoaded(TEXT_INPUT, TEXT_INPUT_MESSAGE, TIME_OUT_IN_SECONDS);
-        return this;
     }
 
     public String getChatTitle() {

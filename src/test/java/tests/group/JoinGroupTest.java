@@ -27,7 +27,7 @@ public class JoinGroupTest extends BaseTest {
     @Test
     @DisplayName("User join group")
     public void joinGroupTest() {
-        GroupPage groupPage = homePage.openGroupPage().check();
+        GroupPage groupPage = homePage.openGroupPage();
         String newGroupName = groupPage.joinRandomGroup().getNewGroupName();
         groupPage.refresh();
         assertThat("Added Group should be in list", isTrue(groupPage.isGroupAddedToMyGroupsList(newGroupName)));

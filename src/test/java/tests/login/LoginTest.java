@@ -16,12 +16,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class LoginTest extends BaseTest {
     private static final User USER = new UserContainer().getUniqueUser();
 
-    private final LoginPage loginPage = new LoginPage();
     private HomePage homePage;
 
     @BeforeEach
     public void login() {
-        homePage = loginPage.signIn(USER);
+        homePage = new LoginPage().signIn(USER);
     }
 
     @DisplayName("Test for user login")

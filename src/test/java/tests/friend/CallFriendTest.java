@@ -25,10 +25,7 @@ public class CallFriendTest extends BaseTest {
     @DisplayName("User calls to the friend test")
     public void callFriendTest() {
         homePage.openFriendPage()
-                .check()
                 .startPhoneCall(FRIEND_NAME)
-                .check()
-                .finishPhoneCall()
-                .check();
+                .finishPhoneCall();
     }
 }

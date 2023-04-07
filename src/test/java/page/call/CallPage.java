@@ -22,14 +22,17 @@ public class CallPage implements LoadableComponent {
     private static final String POSITION_MESSAGE = "Can't find position mode button";
     private static final String DISPLAY_MODE_MESSAGE = "Can't find display mode button";
 
-    public CallPage check() {
+    public CallPage() {
+        check();
+    }
+
+    private void check() {
         isLoaded(FINISH_CONVERSATION_BUTTON, FINISH_CONVERSATION_MESSAGE,TIME_OUT_IN_SECONDS);
         isLoaded(VIDEO_BUTTON, VIDEO_MESSAGE,TIME_OUT_IN_SECONDS);
         isLoaded(MICROPHONE_BUTTON, MICROPHONE_MESSAGE,TIME_OUT_IN_SECONDS);
         isLoaded(CHAT_BUTTON, CHAT_MESSAGE,TIME_OUT_IN_SECONDS);
         isLoaded(POSITION_BUTTON, POSITION_MESSAGE,TIME_OUT_IN_SECONDS);
         isLoaded(DISPLAY_MODE_BUTTON, DISPLAY_MODE_MESSAGE,TIME_OUT_IN_SECONDS);
-        return this;
     }
 
     public FriendsPage finishPhoneCall() {

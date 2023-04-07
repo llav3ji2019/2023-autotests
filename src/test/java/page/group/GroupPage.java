@@ -11,7 +11,6 @@ import utils.MyGroupWrapper;
 import utils.SuggestedGroupWrapper;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
-import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -29,11 +28,14 @@ public class GroupPage implements LoadableComponent {
     private final ElementsCollection groupCards = $$x("//li[@class='scroll-slider_item mr-x']");
     private static final ElementsCollection GROUP_COLLECTION = $$x("//div[@data-l='groupCard,POPULAR_GROUPS.popularTop']");
 
-    public GroupPage check() {
+    public GroupPage() {
+        check();
+    }
+
+    private void check() {
         isLoaded(ACTUAL_GROUP_TYPE_BUTTON, ACTUAL_GROUP_MESSAGE, TIME_OUT_IN_SECONDS);
         isLoaded(OFFICIAL_GROUP_TYPE_BUTTON, OFFICIAL_GROUP_MESSAGE, TIME_OUT_IN_SECONDS);
         isLoaded(NEW_GROUP_TYPE_BUTTON, NEW_GROUP_MESSAGE, TIME_OUT_IN_SECONDS);
-        return this;
     }
 
     public GroupPage joinRandomGroup() {
@@ -70,7 +72,7 @@ public class GroupPage implements LoadableComponent {
                 .should(sizeNotEqual(0).because(COLLECTION_SIZE_MESSAGE));
         int myGroupsSize = groupCards.size();
         for (int i = 0; i < myGroupsSize; i++) {
-            new MyGroupWrapper(groupCards.get(0)).deleteGroup().check().exitFromGroup().goToGroupsPage();
+            new MyGroupWrapper(groupCards.get(0)).deleteGroup().exitFromGroup().goToGroupsPage();
         }
         return this;
     }

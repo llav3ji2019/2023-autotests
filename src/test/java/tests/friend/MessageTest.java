@@ -32,7 +32,7 @@ public class MessageTest extends BaseTest {
     @ValueSource(strings = {"Hello world!", "haha", "hi"})
     @DisplayName("User sends a message to the friend")
     public void sendMessageTest(@NotNull final String text) {
-        ChatPage chatPage = homePage.openFriendPage().check().openChat(FRIEND_NAME);
+        ChatPage chatPage = homePage.openFriendPage().openChat(FRIEND_NAME);
         assertThat("We are trying to send message to wrong friend", isTrue(chatPage.getChatTitle().equals(FRIEND_NAME)));
         chatPage.sendMessage(text);
         assertThat("Message wasn't sent", isTrue(text.equals(chatPage.getLastMessageText())));

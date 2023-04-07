@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class HomePage implements LoadableComponent {
     private static final long TIME_OUT_IN_SECONDS = 5;
-
+    private static final SelenideElement TOOLBAR = $x("//*[@class='navigation']");
     private static final SelenideElement PROFILE_NAME = $x("//a[contains(@data-l, 'userPage')]/div");
     private static final SelenideElement GROUP_BUTTON = $x("//a[@data-l='t,userAltGroup']");
     private static final SelenideElement EXIT_BAR = $x("//div[contains(@class, 'ucard-mini toolbar_ucard js-toolbar-menu')]");
@@ -26,7 +26,16 @@ public class HomePage implements LoadableComponent {
     private static final String LOG_OUT_MESSAGE = "Can't find log out button";
     private static final String CONFIRM_EXIT_MESSAGE = "Can't find confirm button";
     private static final String GROUP_MESSAGE = "Can't find groups button";
+    private static final String TOOLBAR_MESSAGE = "Can't find toolbar";
     private static final String FRIENDS_MESSAGE = "Friends navigation button can't be found";
+
+    public HomePage() {
+        check();
+    }
+
+    private void check() {
+        isLoaded(TOOLBAR, TOOLBAR_MESSAGE, TIME_OUT_IN_SECONDS);
+    }
 
     public boolean checkPage(@NotNull final String name) {
         return doCheckPage(name);

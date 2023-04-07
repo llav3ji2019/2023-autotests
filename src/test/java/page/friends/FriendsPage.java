@@ -30,12 +30,15 @@ public class FriendsPage implements LoadableComponent {
     private static final String SUGGESTIONS_BUTTON_MESSAGE = "Can't find suggestion button on the page";
     private static final String CURRENT_FRIEND_CARD_MESSAGE = "Current friend card is not visible";
 
-    public FriendsPage check() {
+    public FriendsPage() {
+        check();
+    }
+
+    private void check() {
         isLoaded(ALL_FRIEND_BUTTON, ALL_FRIEND_BUTTON_MESSAGE, TIME_OUT_IN_SECONDS);
         isLoaded(ONLINE_FRIENDS_BUTTON, ONLINE_FRIENDS_BUTTON_MESSAGE, TIME_OUT_IN_SECONDS);
         isLoaded(REQUESTS_BUTTON, REQUESTS_BUTTON_MESSAGE, TIME_OUT_IN_SECONDS);
         isLoaded(SUGGESTIONS_BUTTON, SUGGESTIONS_BUTTON_MESSAGE, TIME_OUT_IN_SECONDS);
-        return this;
     }
 
     public ChatPage openChat(@NotNull final String name) {
@@ -44,10 +47,10 @@ public class FriendsPage implements LoadableComponent {
         for (SelenideElement friend : allFriends) {
             FriendWrapper currentCard = new FriendWrapper(friend);
             if (currentCard.getName().equals(name)) {
-                return currentCard.openChatPage().check();
+                return currentCard.openChatPage();
             }
         }
-        return new FriendWrapper(allFriends.get(0)).openChatPage().check();
+        return new FriendWrapper(allFriends.get(0)).openChatPage();
     }
 
     public CallPage startPhoneCall(@NotNull final String name) {
@@ -56,9 +59,9 @@ public class FriendsPage implements LoadableComponent {
         for (SelenideElement friend : allFriends) {
             FriendWrapper currentCard = new FriendWrapper(friend);
             if (currentCard.getName().equals(name)) {
-                return currentCard.openCallPage().check();
+                return currentCard.openCallPage();
             }
         }
-        return new FriendWrapper(allFriends.get(0)).openCallPage().check();
+        return new FriendWrapper(allFriends.get(0)).openCallPage();
     }
 }

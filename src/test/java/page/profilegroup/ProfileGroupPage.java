@@ -22,10 +22,13 @@ public class ProfileGroupPage implements LoadableComponent {
     private static final String USERS_MESSAGE = "Can't see users button in this group";
     private static final String ALL_GROUPS_MESSAGE = "Can't find groups button";
 
-    public ProfileGroupPage check() {
+    public ProfileGroupPage() {
+        check();
+    }
+
+    private void check() {
         isLoaded(NEWS_BUTTON, NEWS_MESSAGE, TIME_OUT_IN_SECONDS);
         isLoaded(USERS_BUTTON, USERS_MESSAGE, TIME_OUT_IN_SECONDS);
-        return this;
     }
 
     public ProfileGroupPage exitFromGroup() {

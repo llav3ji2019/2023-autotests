@@ -29,7 +29,7 @@ public class DeleteAllMyGroups extends BaseTest {
     @DisplayName("User deletes all their groups")
     @RepeatedTest(value = 2, name = "Test {displayName} Number {currentRepetition}/{totalRepetitions}")
     public void deleteAllUsersGroupsTest() {
-        GroupPage groupPage = homePage.openGroupPage().check();
+        GroupPage groupPage = homePage.openGroupPage();
         assertThat("Your groups shouldn't be empty", isFalse(groupPage.areAllMyGroupsDeleted()));
         groupPage.deleteAllGroups();
         assertThat("All groups should be deleted", isTrue(groupPage.areAllMyGroupsDeleted()));

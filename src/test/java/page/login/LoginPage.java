@@ -3,6 +3,7 @@ package page.login;
 import java.util.Objects;
 
 import org.jetbrains.annotations.NotNull;
+import org.openqa.selenium.bidi.log.Log;
 
 import com.codeborne.selenide.SelenideElement;
 
@@ -23,6 +24,16 @@ public class LoginPage implements LoadableComponent {
     private static final String PASSWORD_INPUT_MESSAGE = "Can't find password input";
     private static final String SIGN_IN_BUTTON_MESSAGE = "Can't find sign in button";
     private static final String SIGN_IN_BUTTON_NAME = "Войти в Одноклассники";
+
+    public LoginPage() {
+        check();
+    }
+
+    private void check() {
+        isLoaded(LOGIN_INPUT, LOGIN_INPUT_MESSAGE, TIME_OUT_IN_SECONDS);
+        isLoaded(PASSWORD_INPUT, PASSWORD_INPUT_MESSAGE, TIME_OUT_IN_SECONDS);
+        isLoaded(SIGN_IN_BUTTON, SIGN_IN_BUTTON_MESSAGE, TIME_OUT_IN_SECONDS);
+    }
 
     public HomePage signIn(@NotNull final User user) {
         return doSignIn(user);
