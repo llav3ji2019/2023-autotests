@@ -9,7 +9,6 @@ import com.codeborne.selenide.SelenideElement;
 import page.chat.ChatPage;
 import page.LoadableComponent;
 import page.call.CallPage;
-import utils.FriendWrapper;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selectors.byXpath;

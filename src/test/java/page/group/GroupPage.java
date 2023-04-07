@@ -7,8 +7,6 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import page.LoadableComponent;
-import utils.MyGroupWrapper;
-import utils.SuggestedGroupWrapper;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
@@ -53,6 +51,7 @@ public class GroupPage implements LoadableComponent {
 
     public void refresh() {
         Selenide.refresh();
+        check();
     }
 
     public boolean isGroupAddedToMyGroupsList(@NotNull final String groupName) {

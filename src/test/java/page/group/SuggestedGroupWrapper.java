@@ -1,4 +1,4 @@
-package utils;
+package page.group;
 
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
