@@ -15,7 +15,6 @@ import static org.apache.commons.lang3.BooleanUtils.isTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class JoinGroupTest extends BaseTest {
-    private static final String GROUP_IS_ADDED_MESSAGE = "Added Group should be in list";
     private static final User USER = new UserContainer().getUniqueUser();
 
     private HomePage homePage;
@@ -31,6 +30,6 @@ public class JoinGroupTest extends BaseTest {
         GroupPage groupPage = homePage.openGroupPage().check();
         String newGroupName = groupPage.joinRandomGroup().getNewGroupName();
         groupPage.refresh();
-        assertThat(GROUP_IS_ADDED_MESSAGE, isTrue(groupPage.isGroupAddedToMyGroupsList(newGroupName)));
+        assertThat("Added Group should be in list", isTrue(groupPage.isGroupAddedToMyGroupsList(newGroupName)));
     }
 }

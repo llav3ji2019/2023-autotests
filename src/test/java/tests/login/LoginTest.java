@@ -14,7 +14,6 @@ import static org.apache.commons.lang3.BooleanUtils.isTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class LoginTest extends BaseTest {
-    private static final String RESULT_PAGE = "User should see home page";
     private static final User USER = new UserContainer().getUniqueUser();
 
     private final LoginPage loginPage = new LoginPage();
@@ -28,6 +27,6 @@ public class LoginTest extends BaseTest {
     @DisplayName("Test for user login")
     @Test
     public void loginTest() {
-        assertThat(RESULT_PAGE, isTrue(homePage.checkPage(USER)));
+        assertThat("User should see home page", isTrue(homePage.checkPage(USER)));
     }
 }

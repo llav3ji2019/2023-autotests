@@ -19,8 +19,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class MessageTest extends BaseTest {
     private static final String FRIEND_NAME = "Павел Емельянов";
-    private static final String WRONG_CHAT_TITLE = "We are trying to send message to wrong friend";
-    private static final String LAST_MESSAGE_SENT_MESSAGE = "Message wasn't sent";
     private static final User USER = new UserContainer().getUniqueUser();
 
     private HomePage homePage;
@@ -35,8 +33,8 @@ public class MessageTest extends BaseTest {
     @DisplayName("User sends a message to the friend")
     public void sendMessageTest(@NotNull final String text) {
         ChatPage chatPage = homePage.openFriendPage().check().openChat(FRIEND_NAME);
-        assertThat(WRONG_CHAT_TITLE, isTrue(chatPage.getChatTitle().equals(FRIEND_NAME)));
+        assertThat("We are trying to send message to wrong friend", isTrue(chatPage.getChatTitle().equals(FRIEND_NAME)));
         chatPage.sendMessage(text);
-        assertThat(LAST_MESSAGE_SENT_MESSAGE, isTrue(text.equals(chatPage.getLastMessageText())));
+        assertThat("Message wasn't sent", isTrue(text.equals(chatPage.getLastMessageText())));
     }
 }
