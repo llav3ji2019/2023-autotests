@@ -10,6 +10,7 @@ import tests.BaseTest;
 import utils.user.UserContainer;
 import utils.user.User;
 
+import static org.apache.commons.lang3.BooleanUtils.isTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class LoginTest extends BaseTest {
@@ -27,6 +28,6 @@ public class LoginTest extends BaseTest {
     @DisplayName("Test for user login")
     @Test
     public void loginTest() {
-        assertThat(RESULT_PAGE, homePage.checkPage(USER));
+        assertThat(RESULT_PAGE, isTrue(homePage.checkPage(USER)));
     }
 }

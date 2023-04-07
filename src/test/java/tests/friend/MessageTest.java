@@ -14,6 +14,7 @@ import tests.BaseTest;
 import utils.user.UserContainer;
 import utils.user.User;
 
+import static org.apache.commons.lang3.BooleanUtils.isTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class MessageTest extends BaseTest {
@@ -34,8 +35,8 @@ public class MessageTest extends BaseTest {
     @DisplayName("User sends a message to the friend")
     public void sendMessageTest(@NotNull final String text) {
         ChatPage chatPage = homePage.openFriendPage().check().openChat(FRIEND_NAME);
-        assertThat(WRONG_CHAT_TITLE, chatPage.getChatTitle().equals(FRIEND_NAME));
+        assertThat(WRONG_CHAT_TITLE, isTrue(chatPage.getChatTitle().equals(FRIEND_NAME)));
         chatPage.sendMessage(text);
-        assertThat(LAST_MESSAGE_SENT_MESSAGE, text.equals(chatPage.getLastMessageText()));
+        assertThat(LAST_MESSAGE_SENT_MESSAGE, isTrue(text.equals(chatPage.getLastMessageText())));
     }
 }

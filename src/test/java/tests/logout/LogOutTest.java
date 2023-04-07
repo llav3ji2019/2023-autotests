@@ -10,6 +10,7 @@ import tests.BaseTest;
 import utils.user.UserContainer;
 import utils.user.User;
 
+import static org.apache.commons.lang3.BooleanUtils.isTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class LogOutTest extends BaseTest {
@@ -26,7 +27,7 @@ public class LogOutTest extends BaseTest {
     @Test
     @DisplayName("User exit from ok.ru test")
     public void logOutTest() {
-        assertThat(MAIN_ELEMENT_NOT_FOUND, homePage.exit().checkPage());
+        assertThat(MAIN_ELEMENT_NOT_FOUND, isTrue(homePage.exit().checkPage()));
     }
 
 }

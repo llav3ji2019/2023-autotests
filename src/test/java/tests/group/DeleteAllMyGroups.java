@@ -12,8 +12,9 @@ import tests.BaseTest;
 import utils.user.User;
 import utils.user.UserContainer;
 
+import static org.apache.commons.lang3.BooleanUtils.isFalse;
+import static org.apache.commons.lang3.BooleanUtils.isTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DeleteAllMyGroups extends BaseTest {
     private static final String YOUR_GROUPS_IS_EMPTY_ERROR = "Your groups shouldn't be empty";
@@ -31,8 +32,8 @@ public class DeleteAllMyGroups extends BaseTest {
     @RepeatedTest(value = 2, name = "Test {displayName} Number {currentRepetition}/{totalRepetitions}")
     public void deleteAllUsersGroupsTest() {
         GroupPage groupPage = homePage.openGroupPage().check();
-        assertThat(YOUR_GROUPS_IS_EMPTY_ERROR, !groupPage.areAllMyGroupsDeleted());
+        assertThat(YOUR_GROUPS_IS_EMPTY_ERROR, isFalse(groupPage.areAllMyGroupsDeleted()));
         groupPage.deleteAllGroups();
-        assertThat(GROUPS_IS_DELETED, groupPage.areAllMyGroupsDeleted());
+        assertThat(GROUPS_IS_DELETED, isTrue(groupPage.areAllMyGroupsDeleted()));
     }
 }
