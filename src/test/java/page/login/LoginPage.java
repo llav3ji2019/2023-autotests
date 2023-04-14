@@ -13,6 +13,7 @@ import tests.login.LoginTest;
 import utils.user.User;
 import utils.user.UserHandler;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class LoginPage implements LoadableComponent {
@@ -20,9 +21,6 @@ public class LoginPage implements LoadableComponent {
     private static final SelenideElement LOGIN_INPUT = $x("//input[@id='field_email']");
     private static final SelenideElement PASSWORD_INPUT = $x("//input[@id='field_password']");
     private static final SelenideElement SIGN_IN_BUTTON = $x("//input[@data-l='t,sign_in']");
-    private static final String LOGIN_INPUT_MESSAGE = "Can't find login input";
-    private static final String PASSWORD_INPUT_MESSAGE = "Can't find password input";
-    private static final String SIGN_IN_BUTTON_MESSAGE = "Can't find sign in button";
     private static final String SIGN_IN_BUTTON_NAME = "Войти в Одноклассники";
 
     public LoginPage() {
@@ -30,9 +28,9 @@ public class LoginPage implements LoadableComponent {
     }
 
     private void check() {
-        isLoaded(LOGIN_INPUT, LOGIN_INPUT_MESSAGE, TIME_OUT_IN_SECONDS);
-        isLoaded(PASSWORD_INPUT, PASSWORD_INPUT_MESSAGE, TIME_OUT_IN_SECONDS);
-        isLoaded(SIGN_IN_BUTTON, SIGN_IN_BUTTON_MESSAGE, TIME_OUT_IN_SECONDS);
+        isLoaded(LOGIN_INPUT, "Can't find login input", TIME_OUT_IN_SECONDS);
+        isLoaded(PASSWORD_INPUT, "Can't find password input", TIME_OUT_IN_SECONDS);
+        isLoaded(SIGN_IN_BUTTON, "Can't find sign in button", TIME_OUT_IN_SECONDS);
     }
 
     public HomePage signIn(@NotNull final User user) {
@@ -44,9 +42,9 @@ public class LoginPage implements LoadableComponent {
     }
 
     private HomePage doSignIn(@NotNull final User user) {
-        isLoaded(LOGIN_INPUT, LOGIN_INPUT_MESSAGE, TIME_OUT_IN_SECONDS).setValue(user.getLogin());
-        isLoaded(PASSWORD_INPUT, PASSWORD_INPUT_MESSAGE, TIME_OUT_IN_SECONDS).setValue(user.getPassword());
-        isLoaded(SIGN_IN_BUTTON, SIGN_IN_BUTTON_MESSAGE, TIME_OUT_IN_SECONDS).click();
+        LOGIN_INPUT.shouldBe(visible.because("Can't find login input")).setValue(user.getLogin());
+        PASSWORD_INPUT.shouldBe(visible.because("Can't find password input")).setValue(user.getPassword());
+        SIGN_IN_BUTTON.shouldBe(visible.because("Can't find sign in button")).click();
         return new HomePage();
     }
 
@@ -59,7 +57,7 @@ public class LoginPage implements LoadableComponent {
     }
 
     public boolean checkPage() {
-        return Objects.equals(isLoaded(SIGN_IN_BUTTON, SIGN_IN_BUTTON_MESSAGE, TIME_OUT_IN_SECONDS)
+        return Objects.equals(isLoaded(SIGN_IN_BUTTON, "Can't find sign in button", TIME_OUT_IN_SECONDS)
                 .getValue(), SIGN_IN_BUTTON_NAME);
     }
 }

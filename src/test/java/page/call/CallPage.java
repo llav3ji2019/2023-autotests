@@ -1,10 +1,13 @@
 package page.call;
 
+import java.time.Duration;
+
 import com.codeborne.selenide.SelenideElement;
 
 import page.LoadableComponent;
 import page.friends.FriendsPage;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class CallPage implements LoadableComponent {
@@ -15,28 +18,22 @@ public class CallPage implements LoadableComponent {
     private static final SelenideElement CHAT_BUTTON = $x("//msg-button[@title='Отправить сообщение']");
     private static final SelenideElement POSITION_BUTTON = $x("//msg-button[@title='Свернуть окно звонка']");
     private static final SelenideElement DISPLAY_MODE_BUTTON = $x("//msg-button[@title='Включить полноэкранный режим']");
-    private static final String FINISH_CONVERSATION_MESSAGE = "Can't find finish conversation button";
-    private static final String VIDEO_MESSAGE = "Can't find video button";
-    private static final String MICROPHONE_MESSAGE = "Can't find microphone button";
-    private static final String CHAT_MESSAGE = "Can't find chat button";
-    private static final String POSITION_MESSAGE = "Can't find position mode button";
-    private static final String DISPLAY_MODE_MESSAGE = "Can't find display mode button";
 
     public CallPage() {
         check();
     }
 
     private void check() {
-        isLoaded(FINISH_CONVERSATION_BUTTON, FINISH_CONVERSATION_MESSAGE,TIME_OUT_IN_SECONDS);
-        isLoaded(VIDEO_BUTTON, VIDEO_MESSAGE,TIME_OUT_IN_SECONDS);
-        isLoaded(MICROPHONE_BUTTON, MICROPHONE_MESSAGE,TIME_OUT_IN_SECONDS);
-        isLoaded(CHAT_BUTTON, CHAT_MESSAGE,TIME_OUT_IN_SECONDS);
-        isLoaded(POSITION_BUTTON, POSITION_MESSAGE,TIME_OUT_IN_SECONDS);
-        isLoaded(DISPLAY_MODE_BUTTON, DISPLAY_MODE_MESSAGE,TIME_OUT_IN_SECONDS);
+        isLoaded(FINISH_CONVERSATION_BUTTON, "Can't find finish conversation button",TIME_OUT_IN_SECONDS);
+        isLoaded(VIDEO_BUTTON, "Can't find video button",TIME_OUT_IN_SECONDS);
+        isLoaded(MICROPHONE_BUTTON, "Can't find microphone button",TIME_OUT_IN_SECONDS);
+        isLoaded(CHAT_BUTTON, "Can't find chat button",TIME_OUT_IN_SECONDS);
+        isLoaded(POSITION_BUTTON, "Can't find position mode button",TIME_OUT_IN_SECONDS);
+        isLoaded(DISPLAY_MODE_BUTTON, "Can't find display mode button",TIME_OUT_IN_SECONDS);
     }
 
     public FriendsPage finishPhoneCall() {
-        isLoaded(FINISH_CONVERSATION_BUTTON, FINISH_CONVERSATION_MESSAGE,TIME_OUT_IN_SECONDS).click();
+        FINISH_CONVERSATION_BUTTON.shouldBe(visible.because("Can't find finish conversation button")).click();
         return new FriendsPage();
     }
 }

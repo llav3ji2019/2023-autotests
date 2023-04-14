@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import page.LoadableComponent;
 import page.group.GroupPage;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class ProfileGroupPage implements LoadableComponent {
@@ -15,31 +16,25 @@ public class ProfileGroupPage implements LoadableComponent {
     private static final SelenideElement CONFIRM_BUTTON = $x("//input[@data-l='t,confirm']");
     private static final SelenideElement USERS_BUTTON = $x("//a[contains(text(),'Участники')]");
     private static final SelenideElement ALL_GROUPS_BUTTON = $x("//a[@data-l='t,userAltGroup']");
-    private static final String GROUP_MESSAGE = "Can't find group button";
-    private static final String EXIT_MESSAGE = "Can't find exit button";
-    private static final String NEWS_MESSAGE = "Can't see news button of this group";
-    private static final String CONFIRM_MESSAGE = "Can't find confirm button";
-    private static final String USERS_MESSAGE = "Can't see users button in this group";
-    private static final String ALL_GROUPS_MESSAGE = "Can't find groups button";
 
     public ProfileGroupPage() {
         check();
     }
 
     private void check() {
-        isLoaded(NEWS_BUTTON, NEWS_MESSAGE, TIME_OUT_IN_SECONDS);
-        isLoaded(USERS_BUTTON, USERS_MESSAGE, TIME_OUT_IN_SECONDS);
+        isLoaded(NEWS_BUTTON, "Can't see news button of this group", TIME_OUT_IN_SECONDS);
+        isLoaded(USERS_BUTTON, "Can't see users button in this group", TIME_OUT_IN_SECONDS);
     }
 
     public ProfileGroupPage exitFromGroup() {
-        isLoaded(GROUP_BUTTON, GROUP_MESSAGE, TIME_OUT_IN_SECONDS).click();
-        isLoaded(EXIT_BUTTON, EXIT_MESSAGE, TIME_OUT_IN_SECONDS).click();
-        isLoaded(CONFIRM_BUTTON, CONFIRM_MESSAGE, TIME_OUT_IN_SECONDS).click();
+        GROUP_BUTTON.shouldBe(visible.because("Can't find group button")).click();
+        EXIT_BUTTON.shouldBe(visible.because("Can't find exit button")).click();
+        CONFIRM_BUTTON.shouldBe(visible.because("Can't find confirm button")).click();
         return this;
     }
 
     public GroupPage goToGroupsPage() {
-        isLoaded(ALL_GROUPS_BUTTON, ALL_GROUPS_MESSAGE, TIME_OUT_IN_SECONDS).click();
+        ALL_GROUPS_BUTTON.shouldBe(visible.because("Can't find groups button")).click();
         return new GroupPage();
     }
 }

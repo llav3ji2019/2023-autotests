@@ -29,7 +29,7 @@ public class JoinGroupTest extends BaseTest {
     public void joinGroupTest() {
         GroupPage groupPage = homePage.openGroupPage();
         String newGroupName = groupPage.joinRandomGroup().getNewGroupName();
-        groupPage.refresh();
+        groupPage = groupPage.refresh();
         assertThat("Added Group should be in list", isTrue(groupPage.isGroupAddedToMyGroupsList(newGroupName)));
     }
 }

@@ -8,6 +8,7 @@ import com.codeborne.selenide.SelenideElement;
 import page.LoadableComponent;
 import page.profilegroup.ProfileGroupPage;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -15,24 +16,21 @@ public class MyGroupWrapper  implements LoadableComponent {
     private static final long TIME_OUT_IN_SECONDS = 5;
     private static final By MY_GROUP_BUTTON = byXpath(".//a[@data-l='t,visit' and contains(@hrefattrs, 'UserGroups_MyGroupsNav_OpenItem')]");
     private static final SelenideElement MY_GROUP_TITLE_BUTTON = $x(".//a[@data-l='t,group']");
-    private static final String MY_GROUP_MESSAGE = "Can't find my group";
-    private static final String MY_GROUP_TITLE_MESSAGE = "Can't find group title";
-    private static final String GROUP_CARD_MESSAGE = "Can't find group card";
 
     private final SelenideElement root;
 
     public MyGroupWrapper(@NotNull final SelenideElement root) {
-        isLoaded(root, GROUP_CARD_MESSAGE, TIME_OUT_IN_SECONDS);
+        isLoaded(root, "Can't find group card", TIME_OUT_IN_SECONDS);
         this.root = root;
     }
 
     public String getGroupName() {
-        isLoaded(root.$(MY_GROUP_BUTTON), MY_GROUP_MESSAGE, TIME_OUT_IN_SECONDS).hover();
-        return isLoaded(MY_GROUP_TITLE_BUTTON, MY_GROUP_TITLE_MESSAGE, TIME_OUT_IN_SECONDS).text();
+        root.$(MY_GROUP_BUTTON).shouldBe(visible.because("Can't find my group")).hover();
+        return MY_GROUP_TITLE_BUTTON.shouldBe(visible.because("Can't find group title")).text();
     }
 
     public ProfileGroupPage deleteGroup() {
-        isLoaded(root.$(MY_GROUP_BUTTON), MY_GROUP_MESSAGE, TIME_OUT_IN_SECONDS).click();
+        root.$(MY_GROUP_BUTTON).shouldBe(visible.because("Can't find my group")).click();
         return new ProfileGroupPage();
     }
 }

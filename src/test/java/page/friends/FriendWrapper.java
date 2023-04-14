@@ -9,6 +9,7 @@ import page.LoadableComponent;
 import page.chat.ChatPage;
 import page.call.CallPage;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
 
 public class FriendWrapper implements LoadableComponent {
@@ -16,29 +17,25 @@ public class FriendWrapper implements LoadableComponent {
     private static final By FRIEND_NAME = byXpath(".//a[@class='n-t bold']");
     private static final By CHAT_BUTTON = byXpath(".//a[@data-l='t,sendMessage']");
     private static final By CALL_BUTTON = byXpath(".//a[@data-l='t,call']");
-    private static final String FRIEND_CARD_MESSAGE = "Current friend card is not visible";
-    private static final String FRIEND_NAME_MESSAGE = "Can't find name at current card";
-    private static final String CHAT_BUTTON_MESSAGE = "Can't find send button";
-    private static final String CALL_BUTTON_MESSAGE = "Can't find call button";
 
     private final SelenideElement friendRoot;
 
     public FriendWrapper(@NotNull final SelenideElement friendRoot) {
-        isLoaded(friendRoot, FRIEND_CARD_MESSAGE, TIME_OUT_IN_SECONDS);
+        isLoaded(friendRoot, "Current friend card is not visible", TIME_OUT_IN_SECONDS);
         this.friendRoot = friendRoot;
     }
 
     public String getName() {
-        return isLoaded(friendRoot.$(FRIEND_NAME), FRIEND_NAME_MESSAGE, TIME_OUT_IN_SECONDS).text();
+        return friendRoot.$(FRIEND_NAME).shouldBe(visible.because("Can't find name at current card")).text();
     }
 
     public ChatPage openChatPage() {
-        isLoaded(friendRoot.$(CHAT_BUTTON), CHAT_BUTTON_MESSAGE, TIME_OUT_IN_SECONDS).click();
+        friendRoot.$(CHAT_BUTTON).shouldBe(visible.because("Can't find send button")).click();
         return new ChatPage();
     }
 
     public CallPage openCallPage() {
-        isLoaded(friendRoot.$(CALL_BUTTON), CALL_BUTTON_MESSAGE, TIME_OUT_IN_SECONDS).click();
+        friendRoot.$(CALL_BUTTON).shouldBe(visible.because("Can't find call button")).click();
         return new CallPage();
     }
 }
