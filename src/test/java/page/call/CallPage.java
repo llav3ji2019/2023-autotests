@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class CallPage implements LoadableComponent {
     private static final long TIME_OUT_IN_SECONDS = 5;
+    private static final SelenideElement PHONE_CALL_NAME_LABEL = $x("//*[@class='wrap']/div[@class='name']");
     private static final SelenideElement FINISH_CONVERSATION_BUTTON = $x("//msg-button[@title='Завершить разговор']");
     private static final SelenideElement VIDEO_BUTTON = $x("//msg-button[@title='Выключить видео']");
     private static final SelenideElement MICROPHONE_BUTTON = $x("//msg-button[@title='Выключить микрофон']");
@@ -35,5 +36,9 @@ public class CallPage implements LoadableComponent {
     public FriendsPage finishPhoneCall() {
         FINISH_CONVERSATION_BUTTON.shouldBe(visible.because("Can't find finish conversation button")).click();
         return new FriendsPage();
+    }
+
+    public String getPhoneCallPersonName() {
+        return PHONE_CALL_NAME_LABEL.shouldBe(visible.because("Can't find name of person in current phone call")).text();
     }
 }
