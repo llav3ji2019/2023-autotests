@@ -2,13 +2,13 @@ package page.group;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import page.LoadableComponent;
 
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$x;
@@ -19,7 +19,7 @@ public class GroupPage implements LoadableComponent {
     private static final SelenideElement ACTUAL_GROUP_TYPE_BUTTON = $x("//a[@aria-label='Актуально']");
     private static final SelenideElement OFFICIAL_GROUP_TYPE_BUTTON = $x("//a[@aria-label='Официальные']");
     private static final SelenideElement NEW_GROUP_TYPE_BUTTON = $x("//a[@aria-label='Новые']");
-    private final ElementsCollection groupCards = $$x("//li[@class='scroll-slider_item mr-x']");
+    private static final ElementsCollection GROUP_CARDS = $$x("//li[@class='scroll-slider_item mr-x']");
     private static final ElementsCollection GROUP_COLLECTION = $$x("//div[@data-l='groupCard,POPULAR_GROUPS.popularTop']");
 
     public GroupPage() {
@@ -33,16 +33,16 @@ public class GroupPage implements LoadableComponent {
     }
 
     public GroupPage joinRandomGroup() {
-        new SuggestedGroupWrapper(isLoaded(GROUP_COLLECTION, "Some card is invisible", TIME_OUT_IN_SECONDS)
-                .shouldHave(sizeNotEqual(0).because("Collection size shouldn't be empty"))
-                .first()).joinGroup();
+        areElementsVisible(GROUP_COLLECTION, "Some card is invisible")
+                .shouldHave(sizeNotEqual(0).because("Collection size shouldn't be empty"));
+        new SuggestedGroupWrapper(GROUP_COLLECTION.first()).joinGroup();
         return this;
     }
 
     public String getNewGroupName() {
-        return new SuggestedGroupWrapper(isLoaded(GROUP_COLLECTION, "Some card is invisible", TIME_OUT_IN_SECONDS)
-                .shouldHave(sizeNotEqual(0).because("Collection size shouldn't be empty"))
-                .first()).getGroupName();
+        areElementsVisible(GROUP_COLLECTION, "Some card is invisible")
+                .shouldHave(sizeNotEqual(0).because("Collection size shouldn't be empty"));
+        return new SuggestedGroupWrapper(GROUP_COLLECTION.first()).getGroupName();
     }
 
     public GroupPage refresh() {
@@ -51,27 +51,20 @@ public class GroupPage implements LoadableComponent {
     }
 
     public boolean isGroupAddedToMyGroupsList(@NotNull final String groupName) {
-        for (SelenideElement element : groupCards) {
-            element.shouldBe(visible.because("My card is invisible"));
-        }
-        groupCards.shouldHave(sizeNotEqual(0).because("Collection size shouldn't be empty"));
-        for (SelenideElement element: groupCards) {
-            String currentMyGroupWrapper = new MyGroupWrapper(element).getGroupName();
-            if (currentMyGroupWrapper.equals(groupName)) {
-                return true;
-            }
-        }
-        return false;
+        return areElementsVisible(GROUP_CARDS, "My card is invisible")
+                .shouldHave(sizeNotEqual(0).because("Collection size shouldn't be empty"))
+                .asDynamicIterable()
+                .stream()
+                .map(MyGroupWrapper::new)
+                .anyMatch(currentCard -> currentCard.getGroupName().equals(groupName));
     }
 
     public GroupPage deleteAllGroups() {
-        for (SelenideElement element : groupCards) {
-            element.shouldBe(visible.because("My card is invisible"));
-        }
-        groupCards.shouldHave(sizeNotEqual(0).because("Collection size shouldn't be empty"));
-        int myGroupsSize = groupCards.size();
+        areElementsVisible(GROUP_CARDS, "My card is invisible")
+                .shouldHave(sizeNotEqual(0).because("Collection size shouldn't be empty"));
+        int myGroupsSize = GROUP_CARDS.size();
         for (int i = 0; i < myGroupsSize; i++) {
-            new MyGroupWrapper(groupCards.get(0))
+            new MyGroupWrapper(GROUP_CARDS.get(0))
                     .deleteGroup()
                     .exitFromGroup()
                     .goToGroupsPage();
@@ -80,9 +73,10 @@ public class GroupPage implements LoadableComponent {
     }
 
     public boolean areAllMyGroupsDeleted() {
-        for (SelenideElement element : groupCards) {
-            element.shouldBe(visible.because("My card is invisible"));
-        }
-        return groupCards.isEmpty();
+        return areElementsVisible(GROUP_CARDS, "My card is invisible").isEmpty();
+    }
+
+    private ElementsCollection areElementsVisible(@NotNull final ElementsCollection collection, @NotNull String msg) {
+        return collection.shouldHave(size(collection.filter(visible).size()).because(msg));
     }
 }

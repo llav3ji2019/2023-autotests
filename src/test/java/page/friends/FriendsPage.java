@@ -1,7 +1,11 @@
 package page.friends;
 
+import java.util.Optional;
+import java.util.stream.Stream;
+
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WrapsElement;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -9,7 +13,9 @@ import com.codeborne.selenide.SelenideElement;
 import page.chat.ChatPage;
 import page.LoadableComponent;
 import page.call.CallPage;
+import utils.Exceptions.PersonNotFound;
 
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
@@ -35,33 +41,32 @@ public class FriendsPage implements LoadableComponent {
         isLoaded(SUGGESTIONS_BUTTON, "Can't find suggestion button on the page", TIME_OUT_IN_SECONDS);
     }
 
-    public ChatPage openChat(@NotNull final String name) {
-        ElementsCollection allFriends = $$(FRIEND_CARD);
-        for (SelenideElement friend : allFriends) {
-            friend.shouldBe(visible.because("Current friend card is not visible"));
-        }
-        allFriends.shouldHave(sizeNotEqual(0).because("You have no friends"));
-        for (SelenideElement friend : allFriends) {
-            FriendWrapper currentCard = new FriendWrapper(friend);
-            if (currentCard.getName().equals(name)) {
-                return currentCard.openChatPage();
-            }
-        }
-        return new FriendWrapper(allFriends.get(0)).openChatPage();
+    public ChatPage openChat(@NotNull final String name) throws PersonNotFound {
+        ElementsCollection allFriends = areElementsVisible($$(FRIEND_CARD), "Current friend card is not visible")
+                .shouldHave(sizeNotEqual(0).because("You have no friends"));
+        return findFirstName(allFriends, name)
+                .map(FriendWrapper::openChatPage)
+                .orElseThrow(PersonNotFound::new);
     }
 
-    public CallPage startPhoneCall(@NotNull final String name) {
-        ElementsCollection allFriends = $$(FRIEND_CARD);
-        for (SelenideElement friend : allFriends) {
-            friend.shouldBe(visible.because("Current friend card is not visible"));
-        }
-        allFriends.shouldHave(sizeNotEqual(0).because("You have no friends"));
-        for (SelenideElement friend : allFriends) {
-            FriendWrapper currentCard = new FriendWrapper(friend);
-            if (currentCard.getName().equals(name)) {
-                return currentCard.openCallPage();
-            }
-        }
-        return new FriendWrapper(allFriends.get(0)).openCallPage();
+    public CallPage startPhoneCall(@NotNull final String name) throws PersonNotFound {
+        ElementsCollection allFriends = areElementsVisible($$(FRIEND_CARD), "Current friend card is not visible")
+                .shouldHave(sizeNotEqual(0).because("You have no friends"));
+        return findFirstName(allFriends, name)
+                .map(FriendWrapper::openCallPage)
+                .orElseThrow(PersonNotFound::new);
+    }
+
+    private Optional<FriendWrapper> findFirstName(@NotNull final ElementsCollection collection , @NotNull final String name) {
+        return collection
+                .asDynamicIterable()
+                .stream()
+                .map(FriendWrapper::new)
+                .filter(currentCard -> currentCard.getName().equals(name))
+                .findFirst();
+    }
+
+    private ElementsCollection areElementsVisible(@NotNull final ElementsCollection collection, @NotNull final String msg) {
+        return collection.shouldHave(size(collection.filter(visible).size()).because(msg));
     }
 }
